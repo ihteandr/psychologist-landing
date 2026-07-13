@@ -1,0 +1,218 @@
+<!-- @template name="Psychologist Landing" description="One-page bilingual (RU/HY) landing for a psychologist — hero, areas of help, short bio, Telegram + phone contact" -->
+<!doctype html>
+<html lang="ru">
+<head>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140"><rect width="200" height="140" fill="#f3f2f2"/><circle cx="140" cy="30" r="60" fill="none" stroke="#b68235" stroke-width="1.5"/><text x="60" y="75" font-family="Georgia, serif" font-size="28" fill="#201f1d">В</text></svg></template>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Владимир Гукасян — психолог</title>
+<script src="./ds-base.js"></script>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;600&display=swap">
+<style>
+:root {
+  --leading: 28px;
+  --half: 14px;
+  --edge: clamp(20px, 6vw, 96px);
+  --measure: 60ch;
+}
+body { margin: 0; text-wrap: pretty; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 var(--edge); position: relative; }
+
+/* Armenian needs its own face — Cormorant/Lora carry no Armenian glyphs */
+[lang="hy"] { font-family: "Noto Serif Armenian", var(--font-body); }
+h1[lang="hy"], h2[lang="hy"], h3[lang="hy"], .kicker[lang="hy"] {
+  font-family: "Noto Serif Armenian", var(--font-heading); font-weight: 600;
+}
+
+/* language switch — one language shown at a time */
+body:not([data-lang="hy"]) [lang="hy"] { display: none; }
+body:not([data-lang="ru"]) [lang="ru"] { display: none; }
+
+/* — nav / language toggle — */
+.nav { padding-inline: max(var(--edge), calc((100% - 880px) / 2 + var(--edge))); }
+.lang-toggle { margin-left: auto; }
+.lang-toggle .seg-opt span { font-family: var(--font-heading); font-weight: 600; letter-spacing: 0.04em; }
+
+/* — decorative background: concentric hairline rings behind the hero,
+   drawn as strokes only, in the system's own voice — */
+.rings {
+  position: absolute; top: -40px; right: clamp(-120px, -4vw, -40px);
+  width: 560px; height: 560px; pointer-events: none; z-index: -1;
+}
+.rings::before, .rings::after, .rings i {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  border: 1px solid var(--color-divider);
+}
+.rings::before { inset: 60px; }
+.rings::after { inset: 140px; border-color: color-mix(in srgb, var(--color-accent) 35%, transparent); }
+.rings i { position: absolute; inset: 220px; display: block; border-color: var(--color-divider); }
+
+.hr { margin: calc(2.5 * var(--leading)) 0; }
+
+/* — kicker — */
+.kicker {
+  display: block; font-size: 13px; line-height: var(--half);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--color-accent-700);
+  margin: 0 0 calc(var(--leading) - var(--half));
+}
+
+/* — hero — */
+.hero { padding: calc(3.5 * var(--leading)) 0 0; }
+.hero h1 {
+  font-weight: 400; font-size: clamp(38px, 5.6vw, 60px);
+  line-height: 1.1; letter-spacing: -0.01em; max-width: 16ch;
+  margin: 0 0 var(--leading);
+}
+.hero .sub {
+  font-size: 18px; line-height: var(--leading); max-width: var(--measure);
+  color: color-mix(in srgb, var(--color-text) 82%, transparent);
+  margin: 0;
+}
+.hero .row { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--leading); }
+.hero .btn { font-size: 15px; padding: var(--space-3) var(--space-4); }
+
+/* — areas of help — */
+.areas { padding: 0 0 0; }
+.areas ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.areas li { padding: var(--space-4) 0; border-bottom: 1px solid var(--color-divider); }
+.areas li:first-child { border-top: 1px solid var(--color-divider); }
+.areas h2 { font-weight: 400; font-size: 23px; margin: 0 0 6px; }
+.areas p { font-size: 16px; line-height: 1.6; margin: 0; max-width: var(--measure);
+  color: color-mix(in srgb, var(--color-text) 78%, transparent); }
+
+/* — about — */
+.about p { font-size: 17px; line-height: 1.65; max-width: var(--measure);
+  color: color-mix(in srgb, var(--color-text) 82%, transparent); margin: 0; }
+
+/* — contact — */
+.contact { padding-bottom: calc(3 * var(--leading)); }
+.contact p { font-size: 17px; line-height: 1.6; max-width: var(--measure); margin: 0 0 var(--leading);
+  color: color-mix(in srgb, var(--color-text) 82%, transparent); }
+.contact .row { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
+.contact .btn { font-size: 15px; padding: var(--space-3) var(--space-4); }
+.contact .phone { font-family: var(--font-heading); font-weight: 600; font-size: 18px;
+  color: var(--color-text); text-decoration: none; }
+.contact .phone:hover { color: var(--color-accent-700); }
+
+footer { padding: var(--leading) 0 calc(2 * var(--leading));
+  font-size: 13px; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+
+@media (max-width: 560px) {
+  .rings { display: none; }
+  .hero h1 { max-width: none; }
+}
+</style>
+</head>
+<body data-lang="ru">
+<nav class="nav">
+  <span class="nav-brand">Владимир Гукасян</span>
+  <div class="seg lang-toggle" role="group" aria-label="Язык / Լեզու">
+    <label class="seg-opt"><input type="radio" name="lang" value="ru" checked><span>RU</span></label>
+    <label class="seg-opt"><input type="radio" name="lang" value="hy"><span>HY</span></label>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="rings" aria-hidden="true"><i></i></div>
+    <span class="kicker" lang="ru">Психолог · Психоанализ</span>
+    <span class="kicker" lang="hy">Հոգեբան · Հոգեվերլուծություն</span>
+
+    <h1 lang="ru">Пространство, где можно разобраться в себе</h1>
+    <h1 lang="hy">Տարածք, որտեղ կարող եք ավելի լավ հասկանալ ինքներդ ձեզ</h1>
+
+    <p class="sub" lang="ru">Работаю с людьми, которые хотят лучше понимать себя, свои чувства и решения. Индивидуальная психологическая помощь и психоанализ — очно и онлайн.</p>
+    <p class="sub" lang="hy">Աշխատում եմ մարդկանց հետ, ովքեր ցանկանում են ավելի լավ հասկանալ իրենց, իրենց զգացումները և որոշումները։ Անհատական հոգեբանական օգնություն և հոգեվերլուծություն՝ առերես և առցանց։</p>
+
+    <div class="row">
+      <a class="btn btn-primary" href="https://t.me/ghvladimir" target="_blank" rel="noopener">
+        <span lang="ru">Написать в Telegram</span><span lang="hy">Գրել Telegram-ում</span>
+      </a>
+      <a class="btn btn-secondary" href="tel:+37493251562">
+        <span lang="ru">Позвонить</span><span lang="hy">Զանգահարել</span>
+      </a>
+    </div>
+  </section>
+
+  <hr class="rule hr" />
+
+  <section class="areas">
+    <span class="kicker" lang="ru">С чем я помогаю</span>
+    <span class="kicker" lang="hy">Ինչում եմ օգնում</span>
+    <ul>
+      <li>
+        <h2 lang="ru">Личностное развитие</h2>
+        <h2 lang="hy">Անձնային զարգացում</h2>
+        <p lang="ru">Понять свои цели, ценности и то, что мешает двигаться дальше.</p>
+        <p lang="hy">Հասկանալ ձեր նպատակները, արժեքները և այն, ինչը խանգարում է առաջ շարժվել։</p>
+      </li>
+      <li>
+        <h2 lang="ru">Тревога и страхи</h2>
+        <h2 lang="hy">Անհանգստություն և վախեր</h2>
+        <p lang="ru">Работа с тревожностью, паническими состояниями и конкретными страхами.</p>
+        <p lang="hy">Աշխատանք անհանգստության, խուճապային վիճակների և կոնկրետ վախերի հետ։</p>
+      </li>
+      <li>
+        <h2 lang="ru">Психологические трудности</h2>
+        <h2 lang="hy">Հոգեբանական դժվարություններ</h2>
+        <p lang="ru">Стресс, выгорание, сложности в отношениях, кризисные периоды.</p>
+        <p lang="hy">Սթրես, հոգնածություն, հարաբերությունների խնդիրներ, ճգնաժամային շրջաններ։</p>
+      </li>
+      <li>
+        <h2 lang="ru">Психоанализ</h2>
+        <h2 lang="hy">Հոգեվերլուծություն</h2>
+        <p lang="ru">Исследование бессознательного, повторяющихся сценариев и их истоков.</p>
+        <p lang="hy">Անգիտակցականի, կրկնվող սցենարների և դրանց ակունքների ուսումնասիրություն։</p>
+      </li>
+    </ul>
+  </section>
+
+  <hr class="rule hr" />
+
+  <section class="about">
+    <span class="kicker" lang="ru">Обо мне</span>
+    <span class="kicker" lang="hy">Իմ մասին</span>
+    <p lang="ru">Я психолог, который начинал изучать психологию на собственном опыте: имея проблемы с психикой, я разбирался, как она устроена и как можно исправить её недостатки, возникшие в результате информационного шума вокруг нас, стрессов повседневной жизни, тревог и страхов, возникших при взрослении, или по многим другим причинам. Я предоставляю помощь в стиле психоанализа, помогаю в разборе психического состояния и исправлении возможных ментальных заблуждений.</p>
+    <p lang="hy">Ես հոգեբան եմ, ով հոգեբանություն ուսումնասիրել է սկսել սեփական փորձից ելնելով. ունենալով հոգեկան խնդիրներ, ես հասկանում էի, թե ինչպես է այն կառուցված, և ինչպես կարելի է շտկել դրա թերությունները, որոնք առաջացել են մեզ շրջապատող տեղեկատվական աղմուկի, առօրյա սթրեսների, մեծանալու ընթացքում առաջացած անհանգստությունների ու վախերի կամ շատ այլ պատճառներով։ Ես տրամադրում եմ օգնություն հոգեվերլուծության ոճով՝ օգնելով վերլուծել հոգեկան վիճակը և շտկել հնարավոր մտային մոլորությունները։</p>
+  </section>
+
+  <hr class="rule hr" />
+
+  <section class="contact">
+    <span class="kicker" lang="ru">Связаться</span>
+    <span class="kicker" lang="hy">Կապ</span>
+    <p lang="ru">Напишите в Telegram или позвоните — расскажу, как проходит консультация, и отвечу на вопросы.</p>
+    <p lang="hy">Գրեք Telegram-ում կամ զանգահարեք․ կպատմեմ, թե ինչպես է անցնում խորհրդատվությունը, և կպատասխանեմ հարցերին։</p>
+    <div class="row">
+      <a class="btn btn-primary" href="https://t.me/ghvladimir" target="_blank" rel="noopener">
+        <span lang="ru">Написать в Telegram</span><span lang="hy">Գրել Telegram-ում</span>
+      </a>
+      <a class="phone" href="tel:+37493251562">+374 93 251 562</a>
+    </div>
+  </section>
+
+  <footer>
+    <span lang="ru">© 2026 Владимир Гукасян</span>
+    <span lang="hy">© 2026 Վլադիմիր Ղուկասյան</span>
+  </footer>
+</div>
+<script>
+document.querySelectorAll('input[name="lang"]').forEach((r) => {
+  r.addEventListener('change', () => {
+    document.body.dataset.lang = r.value;
+    try { localStorage.setItem('psy-landing-lang', r.value); } catch (e) {}
+  });
+});
+try {
+  const saved = localStorage.getItem('psy-landing-lang');
+  if (saved === 'ru' || saved === 'hy') {
+    document.body.dataset.lang = saved;
+    const input = document.querySelector('input[name="lang"][value="' + saved + '"]');
+    if (input) input.checked = true;
+  }
+} catch (e) {}
+</script>
+</body>
+</html>
